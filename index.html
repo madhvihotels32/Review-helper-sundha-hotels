@@ -15,7 +15,7 @@ body {
 
 .box {
     background: #ffffff;
-    max-width: 520px;
+    max-width: 560px;
     margin: auto;
     padding: 20px;
     border-radius: 14px;
@@ -24,10 +24,6 @@ body {
 
 h1 {
     color: #c0392b;
-}
-
-p {
-    font-size: 15px;
 }
 
 select, button {
@@ -63,7 +59,7 @@ button {
 
 textarea {
     width: 100%;
-    height: 120px;
+    height: 160px;
     margin-top: 15px;
     font-size: 15px;
     padding: 10px;
@@ -76,10 +72,8 @@ textarea {
 
 <div class="box">
     <h1>Help Us With a Review ⭐</h1>
-    <p>
-        Select your experience below.<br>
-        You may copy & paste the review on Google.
-    </p>
+    <p>Select your experience below.  
+    You may copy & paste the review on Google.</p>
 
     <select id="rating">
         <option value="">Select Rating</option>
@@ -105,7 +99,7 @@ textarea {
 
     <br><br>
     <a class="google"
-       href="https://www.google.com/travel/search?q=sundha%20hotels&g2lb=4965990%2C72248050%2C72248052%2C72317059%2C72414906%2C72471280%2C72485658%2C72560029%2C72573224%2C72647020%2C72686036%2C72803964%2C72882230%2C72958624%2C73059275%2C73064764%2C73107089%2C73192290&hl=en-IN&gl=in&cs=1&ssta=1&ts=CAEaRwopEicyJTB4Mzk1Y2ViMDAxZWE2OGJhOToweGQ4ZjAxMWU4YzViMWVlZDMSGhIUCgcI6g8QARgOEgcI6g8QARgPGAEyAhAA&qs=CAEyFENnc0kwOTNIcll5OWhQallBUkFCOAJCCQnT7rHF6BHw2EIJCdPuscXoEfDY&ap=ugEHcmV2aWV3cw&ictx=111&ved=0CAAQ5JsGahcKEwiQi8aMlIiSAxUAAAAAHQAAAAAQBA"
+       href="https://www.google.com/travel/search?q=sundha%20hotels&ap=ugEHcmV2aWV3cw"
        target="_blank">
        Post on Google ⭐
     </a>
@@ -115,71 +109,73 @@ textarea {
 const reviewData = {
     excellent: {
         taste: [
-            "Absolutely loved the taste of the food at Sundha Hotels. Every dish was full of flavor and perfectly cooked.",
-            "Outstanding taste and quality. One of the best food experiences I’ve had here.",
-            "Amazing taste! Fresh ingredients and great presentation.",
-            "The food was delicious and rich in flavor. Highly impressed.",
-            "Top-class taste. Sundha Hotels really knows how to serve good food."
+            "The food at Sundha Hotels was absolutely delicious and full of flavor. Every dish tasted fresh and well-prepared, which made the meal very enjoyable. It truly feels like one of the best restaurants in Palanpur.",
+            "Amazing taste and excellent food quality throughout the meal. The flavors were perfectly balanced and portions were satisfying. Easily one of the best places to eat if you are nearby.",
+            "I really loved the taste of the food here. Everything was cooked perfectly and served hot. Sundha Hotels definitely stands out as one of the best restaurants around.",
+            "The food quality was outstanding and the taste exceeded expectations. You can tell that good ingredients are used. This is why many people call it the best hotel in Palanpur.",
+            "Every dish was flavorful and well-presented. The taste was consistent and enjoyable from start to finish. Highly recommend this place for good food."
         ],
         service: [
-            "Excellent service with polite and attentive staff. Felt very welcomed.",
-            "Fast and professional service. Staff was extremely courteous.",
-            "Outstanding hospitality and smooth service throughout.",
-            "Very friendly and efficient service. Great experience.",
-            "Impressed with the prompt and respectful service."
+            "The service at Sundha Hotels was excellent and very professional. Staff members were polite and attentive throughout the visit. This level of service makes it one of the best hotels in Palanpur.",
+            "Very quick and friendly service from the staff. Orders were handled smoothly and with care. Overall, a very pleasant experience.",
+            "The staff was welcoming and well-trained. Service was fast without feeling rushed. This kind of hospitality really adds value to the visit.",
+            "Excellent customer service with great attention to detail. The staff ensured everything was comfortable and smooth. One of the best service experiences I’ve had.",
+            "Service quality was top-notch and staff behavior was respectful. Everything was managed efficiently. Definitely a place I would visit again."
         ],
         ambience: [
-            "Lovely ambience, clean and very comfortable atmosphere.",
-            "Calm and pleasant ambience, perfect for family dining.",
-            "Beautiful interiors and well-maintained seating.",
-            "The ambience really enhanced the dining experience.",
-            "Very relaxing and enjoyable ambience."
+            "The ambience was clean, calm, and very comfortable. The atmosphere made the dining experience even better. Easily one of the best restaurant ambiences in Palanpur.",
+            "Loved the interior and overall setup of the place. Seating was comfortable and the environment was pleasant. Perfect for family dining.",
+            "The ambience was peaceful and well-maintained. It created a relaxing vibe during the meal. A great place to spend time comfortably.",
+            "Very nice ambience with good lighting and cleanliness. The environment felt welcoming and premium. This adds to why it’s considered one of the best hotels in Palanpur.",
+            "The overall atmosphere was enjoyable and comfortable. Everything felt well-organized and clean. Definitely a positive dining experience."
         ]
     },
+
     good: {
         taste: [
-            "The food tasted good and was enjoyable.",
-            "Nice taste with good portion sizes.",
-            "Tasty food and satisfying experience.",
-            "Enjoyed the meal, flavor was good.",
-            "Good taste and quality overall."
+            "The food tasted good and was enjoyable overall. Portions were decent and flavors were balanced. A good restaurant choice in the area.",
+            "Nice taste and good quality food. The meal was satisfying and worth the price. Would consider visiting again.",
+            "The food was tasty and freshly prepared. Nothing too fancy, but definitely good. A pleasant dining experience.",
+            "Good taste and decent variety on the menu. Everything was cooked properly. Overall, a satisfying meal.",
+            "The flavors were good and consistent. Food quality met expectations. A reliable place for dining."
         ],
         service: [
-            "Service was good and staff was cooperative.",
-            "Polite staff and timely service.",
-            "Good service overall.",
-            "Staff behaved well and service was smooth.",
-            "Satisfactory service experience."
+            "Service was good and staff was cooperative. Orders were served on time and without issues. Overall a smooth experience.",
+            "The staff behaved well and were helpful. Service was decent throughout the visit. No complaints.",
+            "Good service with polite staff. Everything went smoothly during the meal. A comfortable experience.",
+            "Service quality was satisfactory and staff was attentive. Waiting time was reasonable. Overall good.",
+            "Staff handled orders properly and service was fine. The experience was pleasant and stress-free."
         ],
         ambience: [
-            "Good and comfortable ambience.",
-            "Clean and pleasant environment.",
-            "Nice ambience for casual dining.",
-            "Comfortable seating and decent interiors.",
-            "Overall good ambience."
+            "The ambience was good and comfortable. Seating was decent and the environment was clean. A nice place for casual dining.",
+            "Clean surroundings and pleasant atmosphere. The setup was simple but welcoming. Enjoyed the overall feel.",
+            "The ambience was decent and well-maintained. Nothing over the top, but comfortable. Good for family meals.",
+            "Nice ambience with comfortable seating. The environment felt relaxed. A good dining spot.",
+            "Overall good ambience and cleanliness. The place felt organized and calm. A pleasant experience."
         ]
     },
+
     okay: {
         taste: [
-            "The food was okay and acceptable.",
-            "Taste was average but fine.",
-            "Food quality was decent.",
-            "Okay taste, nothing extraordinary.",
-            "Fair taste overall."
+            "The food was okay and acceptable. Taste was average but filling. Suitable for a quick meal.",
+            "Food quality was decent but not exceptional. Taste was fine for the price. An average experience overall.",
+            "The taste was okay and manageable. Nothing special, but not bad either. Fair experience.",
+            "Food was average in taste and quality. It served the purpose of a regular meal. Could be improved.",
+            "The flavors were mild and simple. Taste was okay and acceptable. An average dining experience."
         ],
         service: [
-            "Service was okay and manageable.",
-            "Staff was helpful but service could improve.",
-            "Average service experience.",
-            "Okay service, not too fast.",
-            "Decent service."
+            "Service was okay and manageable. Staff was polite but service could be faster. Overall acceptable.",
+            "The service experience was average. Staff tried their best but there is room for improvement. Decent visit.",
+            "Service was fine but not very quick. Staff behavior was okay. An average experience.",
+            "The staff was helpful, but service felt a bit slow. Nothing major to complain about. Acceptable overall.",
+            "Service was average and could improve. Staff was cooperative. A decent experience."
         ],
         ambience: [
-            "Ambience was okay and simple.",
-            "Basic but acceptable environment.",
-            "Average ambience.",
-            "Simple seating and setup.",
-            "Okay ambience for a quick meal."
+            "The ambience was okay and simple. Seating was basic and environment was average. Acceptable for short visits.",
+            "Atmosphere was decent but nothing special. Cleanliness was maintained. An okay experience.",
+            "The ambience was average and quiet. It was comfortable enough for a meal. Could be improved.",
+            "Basic ambience with simple seating. Environment was fine. Nothing outstanding.",
+            "The place had a simple and average ambience. It was clean and manageable. An okay dining setup."
         ]
     }
 };
@@ -195,7 +191,6 @@ function generateReview() {
 
     const reviews = reviewData[rating][aspect];
     const randomReview = reviews[Math.floor(Math.random() * reviews.length)];
-
     document.getElementById("reviewBox").value = randomReview;
 }
 
