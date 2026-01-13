@@ -1,204 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sundha Hotels – Review Helper</title>
-
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background: #fff5ec;
-    text-align: center;
-    padding: 20px;
-}
-
-.box {
-    background: #ffffff;
-    max-width: 560px;
-    margin: auto;
-    padding: 20px;
-    border-radius: 14px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-}
-
-h1 {
-    color: #c0392b;
-}
-
-select, button {
-    padding: 10px;
-    font-size: 16px;
-    margin: 10px;
-    border-radius: 6px;
-}
-
-button {
-    border: none;
-    cursor: pointer;
-}
-
-.generate {
-    background: #27ae60;
-    color: white;
-}
-
-.copy {
-    background: #2980b9;
-    color: white;
-}
-
-.google {
-    background: #f39c12;
-    color: white;
-    text-decoration: none;
-    display: inline-block;
-    padding: 12px 18px;
-    border-radius: 6px;
-}
-
-textarea {
-    width: 100%;
-    height: 160px;
-    margin-top: 15px;
-    font-size: 15px;
-    padding: 10px;
-    border-radius: 6px;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>Sundha Hotels Review Helper</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .box {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    textarea {
+      width: 100%;
+      height: 170px;
+      margin-top: 15px;
+      font-size: 15px;
+      padding: 10px;
+    }
+  </style>
 </head>
-
 <body>
 
+<h1>Sundha Hotels – Review Helper</h1>
+
 <div class="box">
-    <h1>Help Us With a Review ⭐</h1>
-    <p>Select your experience below.  
-    You may copy & paste the review on Google.</p>
+  <label>Overall Experience</label>
+  <select id="experience">
+    <option value="excellent">Excellent</option>
+    <option value="good">Good</option>
+    <option value="okay">Okay</option>
+  </select>
 
-    <select id="rating">
-        <option value="">Select Rating</option>
-        <option value="excellent">Excellent</option>
-        <option value="good">Good</option>
-        <option value="okay">Okay</option>
-    </select>
+  <label>Review Category</label>
+  <select id="category">
+    <option value="food">Food</option>
+    <option value="taste">Taste</option>
+    <option value="ambience">Ambience</option>
+    <option value="service">Service</option>
+  </select>
 
-    <select id="aspect">
-        <option value="">Select Aspect</option>
-        <option value="taste">Taste</option>
-        <option value="service">Service</option>
-        <option value="ambience">Ambience</option>
-    </select>
+  <button onclick="generateReview()">Generate Review</button>
 
-    <br>
-    <button class="generate" onclick="generateReview()">Generate Review</button>
-
-    <textarea id="reviewBox" placeholder="Your review will appear here..."></textarea>
-
-    <br>
-    <button class="copy" onclick="copyReview()">Copy Review</button>
-
-    <br><br>
-    <a class="google"
-       href="https://www.google.com/travel/search?q=sundha%20hotels&ap=ugEHcmV2aWV3cw"
-       target="_blank">
-       Post on Google ⭐
-    </a>
+  <textarea id="output" placeholder="Your review will appear here..."></textarea>
 </div>
 
 <script>
-const reviewData = {
-    excellent: {
-        taste: [
-            "The food at Sundha Hotels was absolutely delicious and full of flavor. Every dish tasted fresh and well-prepared, which made the meal very enjoyable. It truly feels like one of the best restaurants in Palanpur.",
-            "Amazing taste and excellent food quality throughout the meal. The flavors were perfectly balanced and portions were satisfying. Easily one of the best places to eat if you are nearby.",
-            "I really loved the taste of the food here. Everything was cooked perfectly and served hot. Sundha Hotels definitely stands out as one of the best restaurants around.",
-            "The food quality was outstanding and the taste exceeded expectations. You can tell that good ingredients are used. This is why many people call it the best hotel in Palanpur.",
-            "Every dish was flavorful and well-presented. The taste was consistent and enjoyable from start to finish. Highly recommend this place for good food."
-        ],
-        service: [
-            "The service at Sundha Hotels was excellent and very professional. Staff members were polite and attentive throughout the visit. This level of service makes it one of the best hotels in Palanpur.",
-            "Very quick and friendly service from the staff. Orders were handled smoothly and with care. Overall, a very pleasant experience.",
-            "The staff was welcoming and well-trained. Service was fast without feeling rushed. This kind of hospitality really adds value to the visit.",
-            "Excellent customer service with great attention to detail. The staff ensured everything was comfortable and smooth. One of the best service experiences I’ve had.",
-            "Service quality was top-notch and staff behavior was respectful. Everything was managed efficiently. Definitely a place I would visit again."
-        ],
-        ambience: [
-            "The ambience was clean, calm, and very comfortable. The atmosphere made the dining experience even better. Easily one of the best restaurant ambiences in Palanpur.",
-            "Loved the interior and overall setup of the place. Seating was comfortable and the environment was pleasant. Perfect for family dining.",
-            "The ambience was peaceful and well-maintained. It created a relaxing vibe during the meal. A great place to spend time comfortably.",
-            "Very nice ambience with good lighting and cleanliness. The environment felt welcoming and premium. This adds to why it’s considered one of the best hotels in Palanpur.",
-            "The overall atmosphere was enjoyable and comfortable. Everything felt well-organized and clean. Definitely a positive dining experience."
-        ]
-    },
+const reviews = {
+  excellent: {
+    food: [
+      "The food at Sundha Hotels was absolutely delicious and exceeded my expectations. Every dish was fresh, well-cooked, and full of flavor throughout the meal. Sundha Hotels truly deserves to be called one of the best restaurants in Palanpur.",
+      "Dining at Sundha Hotels was an amazing experience because of the excellent food quality. The flavors were rich and the presentation was impressive. Sundha Hotels clearly maintains high standards when it comes to food.",
+      "I had a wonderful food experience at Sundha Hotels with perfectly cooked dishes and great taste. The ingredients felt fresh and well-balanced. Sundha Hotels is definitely a place I would recommend to others.",
+      "The food served at Sundha Hotels was flavorful and very satisfying. Each dish reflected good quality and careful preparation. Sundha Hotels stands out as a top choice for food lovers.",
+      "Sundha Hotels impressed me with its delicious food and generous portions. The quality was consistent and enjoyable. Overall, Sundha Hotels delivered an excellent dining experience."
+    ],
+    taste: [
+      "The taste of the food at Sundha Hotels was outstanding and memorable. Each dish had balanced spices and authentic flavors. Sundha Hotels truly lives up to its reputation as a best restaurant.",
+      "I really enjoyed the taste of the dishes at Sundha Hotels as they were rich and well-seasoned. Nothing felt bland or overpowered. Sundha Hotels clearly focuses on taste quality.",
+      "Every item at Sundha Hotels had a consistent and enjoyable taste. The flavors were fresh and satisfying throughout the meal. Sundha Hotels knows how to deliver great taste.",
+      "The taste experience at Sundha Hotels exceeded expectations and remained excellent. Even simple dishes were packed with flavor. Sundha Hotels is a reliable place for good taste.",
+      "Food tasted amazing at Sundha Hotels with proper seasoning and freshness. Each bite was enjoyable and fulfilling. Sundha Hotels definitely delivers when it comes to taste."
+    ],
+    ambience: [
+      "The ambience at Sundha Hotels was calm, clean, and very welcoming. The seating and lighting made the environment comfortable. Sundha Hotels offers a pleasant dining atmosphere.",
+      "I loved the ambience at Sundha Hotels because it felt peaceful and well-maintained. The environment added to the overall experience. Sundha Hotels provides a relaxing setting.",
+      "The ambience inside Sundha Hotels was classy and suitable for families. Everything felt organized and comfortable. Sundha Hotels creates a positive dining mood.",
+      "Sundha Hotels has a warm and inviting ambience that makes dining enjoyable. The decor was simple yet elegant. Overall, Sundha Hotels offers a great atmosphere.",
+      "The ambience at Sundha Hotels was impressive and comfortable. Cleanliness and arrangement were well taken care of. Sundha Hotels definitely stands out here."
+    ],
+    service: [
+      "The service at Sundha Hotels was excellent and very professional. The staff was polite, attentive, and quick to help. Sundha Hotels clearly values customer satisfaction.",
+      "I was impressed with the service quality at Sundha Hotels as the staff was courteous and responsive. Orders were handled smoothly. Sundha Hotels provides a premium service experience.",
+      "Staff at Sundha Hotels offered great service and made us feel welcome. Everything was handled efficiently and politely. Sundha Hotels maintains high service standards.",
+      "The service experience at Sundha Hotels was smooth and stress-free. Staff members were friendly and respectful. Sundha Hotels delivers reliable service.",
+      "Service at Sundha Hotels matched the quality of the food and ambience. The staff was helpful throughout the visit. Sundha Hotels left a positive impression."
+    ]
+  },
 
-    good: {
-        taste: [
-            "The food tasted good and was enjoyable overall. Portions were decent and flavors were balanced. A good restaurant choice in the area.",
-            "Nice taste and good quality food. The meal was satisfying and worth the price. Would consider visiting again.",
-            "The food was tasty and freshly prepared. Nothing too fancy, but definitely good. A pleasant dining experience.",
-            "Good taste and decent variety on the menu. Everything was cooked properly. Overall, a satisfying meal.",
-            "The flavors were good and consistent. Food quality met expectations. A reliable place for dining."
-        ],
-        service: [
-            "Service was good and staff was cooperative. Orders were served on time and without issues. Overall a smooth experience.",
-            "The staff behaved well and were helpful. Service was decent throughout the visit. No complaints.",
-            "Good service with polite staff. Everything went smoothly during the meal. A comfortable experience.",
-            "Service quality was satisfactory and staff was attentive. Waiting time was reasonable. Overall good.",
-            "Staff handled orders properly and service was fine. The experience was pleasant and stress-free."
-        ],
-        ambience: [
-            "The ambience was good and comfortable. Seating was decent and the environment was clean. A nice place for casual dining.",
-            "Clean surroundings and pleasant atmosphere. The setup was simple but welcoming. Enjoyed the overall feel.",
-            "The ambience was decent and well-maintained. Nothing over the top, but comfortable. Good for family meals.",
-            "Nice ambience with comfortable seating. The environment felt relaxed. A good dining spot.",
-            "Overall good ambience and cleanliness. The place felt organized and calm. A pleasant experience."
-        ]
-    },
+  good: {
+    food: [
+      "The food at Sundha Hotels was good and satisfying. Quality was consistent and portions were decent. Sundha Hotels provided a pleasant dining experience.",
+      "I enjoyed the food at Sundha Hotels as it was well-cooked and tasty. While not extraordinary, it met expectations. Sundha Hotels is a reliable option.",
+      "Food quality at Sundha Hotels was decent and enjoyable. The dishes were fresh and properly prepared. Sundha Hotels offered a good experience.",
+      "The meal at Sundha Hotels was filling and well-prepared. Taste and quality were balanced. Overall, Sundha Hotels was a good choice.",
+      "The food served at Sundha Hotels was good and reasonably priced. Everything tasted fine. Sundha Hotels delivered a satisfactory meal."
+    ]
+  },
 
-    okay: {
-        taste: [
-            "The food was okay and acceptable. Taste was average but filling. Suitable for a quick meal.",
-            "Food quality was decent but not exceptional. Taste was fine for the price. An average experience overall.",
-            "The taste was okay and manageable. Nothing special, but not bad either. Fair experience.",
-            "Food was average in taste and quality. It served the purpose of a regular meal. Could be improved.",
-            "The flavors were mild and simple. Taste was okay and acceptable. An average dining experience."
-        ],
-        service: [
-            "Service was okay and manageable. Staff was polite but service could be faster. Overall acceptable.",
-            "The service experience was average. Staff tried their best but there is room for improvement. Decent visit.",
-            "Service was fine but not very quick. Staff behavior was okay. An average experience.",
-            "The staff was helpful, but service felt a bit slow. Nothing major to complain about. Acceptable overall.",
-            "Service was average and could improve. Staff was cooperative. A decent experience."
-        ],
-        ambience: [
-            "The ambience was okay and simple. Seating was basic and environment was average. Acceptable for short visits.",
-            "Atmosphere was decent but nothing special. Cleanliness was maintained. An okay experience.",
-            "The ambience was average and quiet. It was comfortable enough for a meal. Could be improved.",
-            "Basic ambience with simple seating. Environment was fine. Nothing outstanding.",
-            "The place had a simple and average ambience. It was clean and manageable. An okay dining setup."
-        ]
-    }
+  okay: {
+    food: [
+      "The food at Sundha Hotels was okay and met basic expectations. Taste was average but acceptable. Sundha Hotels offered a decent experience.",
+      "Food quality at Sundha Hotels was acceptable but could be improved. Some dishes were better than others. Overall, Sundha Hotels was fine.",
+      "The food at Sundha Hotels was average and filling. Nothing stood out strongly. Sundha Hotels provided a neutral dining experience.",
+      "Dining at Sundha Hotels was okay with reasonable food quality. Taste was simple and basic. Sundha Hotels met minimum expectations.",
+      "The food experience at Sundha Hotels was ordinary but not disappointing. Quality was average. Sundha Hotels was acceptable overall."
+    ]
+  }
 };
 
 function generateReview() {
-    const rating = document.getElementById("rating").value;
-    const aspect = document.getElementById("aspect").value;
-
-    if (!rating || !aspect) {
-        alert("Please select both rating and aspect.");
-        return;
-    }
-
-    const reviews = reviewData[rating][aspect];
-    const randomReview = reviews[Math.floor(Math.random() * reviews.length)];
-    document.getElementById("reviewBox").value = randomReview;
-}
-
-function copyReview() {
-    const box = document.getElementById("reviewBox");
-    box.select();
-    document.execCommand("copy");
-    alert("Review copied! Now paste it on Google 😊");
+  const exp = document.getElementById("experience").value;
+  const cat = document.getElementById("category").value;
+  const options = reviews[exp][cat];
+  const randomReview = options[Math.floor(Math.random() * options.length)];
+  document.getElementById("output").value = randomReview;
 }
 </script>
 
