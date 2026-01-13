@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sundha Hotels – Review Helper</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #fff5ec;
+    text-align: center;
+    padding: 20px;
+}
+
+.box {
+    background: #ffffff;
+    max-width: 520px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+h1 {
+    color: #c0392b;
+}
+
+p {
+    font-size: 15px;
+}
+
+select, button {
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px;
+    border-radius: 6px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+.generate {
+    background: #27ae60;
+    color: white;
+}
+
+.copy {
+    background: #2980b9;
+    color: white;
+}
+
+.google {
+    background: #f39c12;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 6px;
+}
+
+textarea {
+    width: 100%;
+    height: 120px;
+    margin-top: 15px;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>Help Us With a Review ⭐</h1>
+    <p>
+        Select your experience below.<br>
+        You may copy & paste the review on Google.
+    </p>
+
+    <select id="rating">
+        <option value="">Select Rating</option>
+        <option value="excellent">Excellent</option>
+        <option value="good">Good</option>
+        <option value="okay">Okay</option>
+    </select>
+
+    <select id="aspect">
+        <option value="">Select Aspect</option>
+        <option value="taste">Taste</option>
+        <option value="service">Service</option>
+        <option value="ambience">Ambience</option>
+    </select>
+
+    <br>
+    <button class="generate" onclick="generateReview()">Generate Review</button>
+
+    <textarea id="reviewBox" placeholder="Your review will appear here..."></textarea>
+
+    <br>
+    <button class="copy" onclick="copyReview()">Copy Review</button>
+
+    <br><br>
+    <a class="google"
+       href="https://www.google.com/travel/search?q=sundha%20hotels&g2lb=4965990%2C72248050%2C72248052%2C72317059%2C72414906%2C72471280%2C72485658%2C72560029%2C72573224%2C72647020%2C72686036%2C72803964%2C72882230%2C72958624%2C73059275%2C73064764%2C73107089%2C73192290&hl=en-IN&gl=in&cs=1&ssta=1&ts=CAEaRwopEicyJTB4Mzk1Y2ViMDAxZWE2OGJhOToweGQ4ZjAxMWU4YzViMWVlZDMSGhIUCgcI6g8QARgOEgcI6g8QARgPGAEyAhAA&qs=CAEyFENnc0kwOTNIcll5OWhQallBUkFCOAJCCQnT7rHF6BHw2EIJCdPuscXoEfDY&ap=ugEHcmV2aWV3cw&ictx=111&ved=0CAAQ5JsGahcKEwiQi8aMlIiSAxUAAAAAHQAAAAAQBA"
+       target="_blank">
+       Post on Google ⭐
+    </a>
+</div>
+
+<script>
+const reviewData = {
+    excellent: {
+        taste: [
+            "Absolutely loved the taste of the food at Sundha Hotels. Every dish was full of flavor and perfectly cooked.",
+            "Outstanding taste and quality. One of the best food experiences I’ve had here.",
+            "Amazing taste! Fresh ingredients and great presentation.",
+            "The food was delicious and rich in flavor. Highly impressed.",
+            "Top-class taste. Sundha Hotels really knows how to serve good food."
+        ],
+        service: [
+            "Excellent service with polite and attentive staff. Felt very welcomed.",
+            "Fast and professional service. Staff was extremely courteous.",
+            "Outstanding hospitality and smooth service throughout.",
+            "Very friendly and efficient service. Great experience.",
+            "Impressed with the prompt and respectful service."
+        ],
+        ambience: [
+            "Lovely ambience, clean and very comfortable atmosphere.",
+            "Calm and pleasant ambience, perfect for family dining.",
+            "Beautiful interiors and well-maintained seating.",
+            "The ambience really enhanced the dining experience.",
+            "Very relaxing and enjoyable ambience."
+        ]
+    },
+    good: {
+        taste: [
+            "The food tasted good and was enjoyable.",
+            "Nice taste with good portion sizes.",
+            "Tasty food and satisfying experience.",
+            "Enjoyed the meal, flavor was good.",
+            "Good taste and quality overall."
+        ],
+        service: [
+            "Service was good and staff was cooperative.",
+            "Polite staff and timely service.",
+            "Good service overall.",
+            "Staff behaved well and service was smooth.",
+            "Satisfactory service experience."
+        ],
+        ambience: [
+            "Good and comfortable ambience.",
+            "Clean and pleasant environment.",
+            "Nice ambience for casual dining.",
+            "Comfortable seating and decent interiors.",
+            "Overall good ambience."
+        ]
+    },
+    okay: {
+        taste: [
+            "The food was okay and acceptable.",
+            "Taste was average but fine.",
+            "Food quality was decent.",
+            "Okay taste, nothing extraordinary.",
+            "Fair taste overall."
+        ],
+        service: [
+            "Service was okay and manageable.",
+            "Staff was helpful but service could improve.",
+            "Average service experience.",
+            "Okay service, not too fast.",
+            "Decent service."
+        ],
+        ambience: [
+            "Ambience was okay and simple.",
+            "Basic but acceptable environment.",
+            "Average ambience.",
+            "Simple seating and setup.",
+            "Okay ambience for a quick meal."
+        ]
+    }
+};
+
+function generateReview() {
+    const rating = document.getElementById("rating").value;
+    const aspect = document.getElementById("aspect").value;
+
+    if (!rating || !aspect) {
+        alert("Please select both rating and aspect.");
+        return;
+    }
+
+    const reviews = reviewData[rating][aspect];
+    const randomReview = reviews[Math.floor(Math.random() * reviews.length)];
+
+    document.getElementById("reviewBox").value = randomReview;
+}
+
+function copyReview() {
+    const box = document.getElementById("reviewBox");
+    box.select();
+    document.execCommand("copy");
+    alert("Review copied! Now paste it on Google 😊");
+}
+</script>
+
+</body>
+</html>
